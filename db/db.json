@@ -1,0 +1,19 @@
+{
+  "todoApp": [
+    {
+      "groupName": "x",
+      "category": "Home",
+      "todos": [
+        {
+          "todoPack": "z",
+          "todo": [
+            {
+              "name": "l",
+              "isDone": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
