@@ -3,7 +3,8 @@ import Button from "../../ui/Button";
 import IsMobile from "../../utils/components/IsMobile";
 import { useSelector } from "react-redux";
 import { getGroupById } from "../group/groupSlice";
-import Todo from "./Todo";
+
+import Todos from "./Todos";
 
 function TodoPage() {
   const { todo: todoId } = useParams();
@@ -14,7 +15,7 @@ function TodoPage() {
       <div className="flex justify-between items-center">
         <h1 className="font-bold text-3xl text-lynch-900">{group.name}</h1>
         <div className="flex gap-3">
-          <img src="/svg/edit.svg" className="w-10 cursor-pointer" alt="" />
+          {/* <img src="/svg/edit.svg" className="w-10 cursor-pointer" alt="" /> */}
           <IsMobile
             nonMobile={
               <>
@@ -27,12 +28,7 @@ function TodoPage() {
           />
         </div>
       </div>
-      <div className="flex sm:flex-wrap gap-5 mt-5 flex-col sm:flex-row">
-        <Todo />
-        <Todo />
-        <Todo />
-        <Todo />
-      </div>
+      <Todos />
     </main>
   );
 }
