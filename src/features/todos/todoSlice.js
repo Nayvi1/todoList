@@ -45,3 +45,4 @@ const todoSlice = createSlice({
 });
 
 export default todoSlice.reducer;
+export const { createTodo, deleteTodo, editTodo } = todoSlice.actions;

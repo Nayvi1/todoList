@@ -20,7 +20,7 @@ function Modal({ show = false, modalName = "x", children, onClose }) {
               onClick={onClose}
             />
           </div>
-          {children}
+          <div className="bg-white p-6 rounded-b-lg">{children}</div>
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../ui/Button";
 import { createGroup, editGroup, getGroupById } from "./groupSlice";
+import Input from "../../ui/Input";
 /* eslint-disable react/prop-types */
 function GroupForm({ method, id, onClose }) {
   const disptach = useDispatch();
@@ -28,29 +29,16 @@ function GroupForm({ method, id, onClose }) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-6 flex flex-col gap-14 rounded-b-lg"
-    >
-      <div className="flex flex-col gap-6 [&>label]:flex [&>label]:flex-col [&_input]:h-10 [&_input]:outline-none [&_input]:rounded-md [&_input]:bg-slate-200 [&_input]:border [&_input]:border-lynch-300 [&_input]:px-3">
-        <label>
-          <span>Name</span>
-          <input
-            defaultValue={method === "patch" ? group.name : ""}
-            required
-            type="text"
-            name="name"
-          />
-        </label>
-        <label>
-          <span>category</span>
-          <input
-            defaultValue={method === "patch" ? group.category : ""}
-            required
-            type="text"
-            name="category"
-          />
-        </label>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-14 ">
+      <div className="flex flex-col gap-6">
+        <Input
+          defaultValue={method === "patch" ? group.name : ""}
+          name="name"
+        />
+        <Input
+          defaultValue={method === "patch" ? group.category : ""}
+          name="category"
+        />
 
         <input type="text" hidden defaultValue={id} name="id" />
       </div>

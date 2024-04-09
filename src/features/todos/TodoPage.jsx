@@ -5,10 +5,27 @@ import { useSelector } from "react-redux";
 import { getGroupById } from "../group/groupSlice";
 
 import Todos from "./Todos";
+import Modal from "../../ui/Modal";
+import CreateTodo from "./CreateTodo";
+import { useState } from "react";
 
 function TodoPage() {
   const { todo: todoId } = useParams();
   const group = useSelector((state) => getGroupById(state, todoId));
+
+  const [open, setOpen] = useState({
+    createTodo: false,
+  });
+
+  function handleClick() {
+    setOpen((prev) => {
+      return { ...prev, createTodo: true };
+    });
+  }
+
+  function handleClose() {
+    setOpen({ createTodo: false });
+  }
 
   return (
     <main className="max-w-[1360px] mx-auto sm:p-10 p-7">
@@ -22,13 +39,20 @@ function TodoPage() {
                 <Button to="/groups" type="secondery">
                   Back
                 </Button>
-                <Button>New</Button>
+                <Button onClick={handleClick}>New</Button>
               </>
             }
           />
         </div>
       </div>
       <Todos />
+      <Modal
+        show={open.createTodo}
+        onClose={handleClose}
+        modalName="Add new Todo"
+      >
+        <CreateTodo onClose={handleClose} />
+      </Modal>
     </main>
   );
 }
