@@ -1,18 +1,19 @@
 import { useParams } from "react-router-dom";
 import Button from "../../ui/Button";
 import IsMobile from "../../utils/components/IsMobile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getGroupById } from "../group/groupSlice";
 
 import Todos from "./Todos";
 import Modal from "../../ui/Modal";
 import CreateTodo from "./CreateTodo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createTodos } from "./todoSlice";
 
 function TodoPage() {
   const { todo: todoId } = useParams();
   const group = useSelector((state) => getGroupById(state, todoId));
-
+  const dispatch = useDispatch();
   const [open, setOpen] = useState({
     createTodo: false,
   });
@@ -26,6 +27,10 @@ function TodoPage() {
   function handleClose() {
     setOpen({ createTodo: false });
   }
+
+  useEffect(() => {
+    dispatch(createTodos(todoId));
+  }, [dispatch, todoId]);
 
   return (
     <main className="max-w-[1360px] mx-auto sm:p-10 p-7">
@@ -45,13 +50,17 @@ function TodoPage() {
           />
         </div>
       </div>
+      {/**
+       * TODO:
+       * display the created todos, also be able to mark it as done and delete/edit it
+       */}
       <Todos />
       <Modal
         show={open.createTodo}
         onClose={handleClose}
         modalName="Add new Todo"
       >
-        <CreateTodo onClose={handleClose} />
+        <CreateTodo onClose={handleClose} id={todoId} />
       </Modal>
     </main>
   );

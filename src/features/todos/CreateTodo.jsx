@@ -3,7 +3,7 @@ import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import { createTodo } from "./todoSlice";
 /* eslint-disable react/prop-types */
-function CreateTodo({ onClose }) {
+function CreateTodo({ onClose, id }) {
   const dispatch = useDispatch();
 
   function handleSubmit(e) {
@@ -18,6 +18,7 @@ function CreateTodo({ onClose }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-14 ">
       <Input name="name" />
+      <input type="text" hidden defaultValue={id} name="id" />
       <div className="flex gap-2 items-center self-end">
         <Button type="secondery" onClick={onClose}>
           Close
