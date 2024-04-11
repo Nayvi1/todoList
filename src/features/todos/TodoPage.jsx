@@ -11,8 +11,10 @@ import { useEffect, useState } from "react";
 import { createTodos } from "./todoSlice";
 
 function TodoPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const { todo: todoId } = useParams();
   const group = useSelector((state) => getGroupById(state, todoId));
+
   const dispatch = useDispatch();
   const [open, setOpen] = useState({
     createTodo: false,
@@ -30,8 +32,9 @@ function TodoPage() {
 
   useEffect(() => {
     dispatch(createTodos(todoId));
+    setIsLoading(false);
   }, [dispatch, todoId]);
-
+  console.log(isLoading);
   return (
     <main className="max-w-[1360px] mx-auto sm:p-10 p-7">
       <div className="flex justify-between items-center">
@@ -52,9 +55,9 @@ function TodoPage() {
       </div>
       {/**
        * TODO:
-       * display the created todos, also be able to mark it as done and delete/edit it
+       * be able to mark it as done and delete/edit it
        */}
-      <Todos />
+      {!isLoading && <Todos todoId={todoId} />}
       <Modal
         show={open.createTodo}
         onClose={handleClose}

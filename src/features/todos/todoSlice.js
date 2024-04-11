@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [
@@ -32,7 +32,10 @@ const todoSlice = createSlice({
       );
 
       if (group + 1) {
-        state.todos[group].todo.push({ todoTitle: action.payload.name });
+        state.todos[group].todo.push({
+          todoTitle: action.payload.name,
+          id: action.payload.todoId,
+        });
       }
     },
     createTodos(state, action) {
@@ -51,6 +54,22 @@ const todoSlice = createSlice({
     },
   },
 });
+
+function selectTodoId(_, id) {
+  return id;
+}
+function selectTodo(state) {
+  return state;
+}
+
+export const getTodos = createSelector(
+  [selectTodoId, selectTodo],
+  (id, state) => {
+    const result = state.todo.todos.find((todo) => todo.id === id);
+    // console.log(result);
+    return result;
+  }
+);
 
 export default todoSlice.reducer;
 export const { createTodo, deleteTodo, editTodo, createTodos } =

@@ -17,6 +17,9 @@ export const localstorageMiddleware = () => (next) => (action) => {
   if (action.type === "group/createGroup") {
     action.payload.id = Math.floor(Math.random() * 1000000000) + "T";
   }
+  if (action.type === "todo/createTodo") {
+    action.payload.todoId = Math.floor(Math.random() * 1000000000) + "L";
+  }
   return next(action);
 };
 

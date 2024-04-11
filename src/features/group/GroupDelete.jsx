@@ -11,7 +11,7 @@ function GroupDelete({ onClose, id }) {
   }
 
   return (
-    <div className="bg-white p-6 flex flex-col gap-14 rounded-b-lg">
+    <div className=" flex flex-col gap-14 ">
       <div className="flex flex-col ">
         <p className="text-xl text-lynch-900">
           Are you sure you want to delete the group?
