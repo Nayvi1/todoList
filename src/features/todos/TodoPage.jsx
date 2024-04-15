@@ -12,8 +12,8 @@ import { createTodos } from "./todoSlice";
 
 function TodoPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const { todo: todoId } = useParams();
-  const group = useSelector((state) => getGroupById(state, todoId));
+  const { todo: todosId } = useParams();
+  const group = useSelector((state) => getGroupById(state, todosId));
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState({
@@ -31,10 +31,10 @@ function TodoPage() {
   }
 
   useEffect(() => {
-    dispatch(createTodos(todoId));
+    dispatch(createTodos(todosId));
     setIsLoading(false);
-  }, [dispatch, todoId]);
-  console.log(isLoading);
+  }, [dispatch, todosId]);
+
   return (
     <main className="max-w-[1360px] mx-auto sm:p-10 p-7">
       <div className="flex justify-between items-center">
@@ -55,15 +55,15 @@ function TodoPage() {
       </div>
       {/**
        * TODO:
-       * be able to mark it as done and delete/edit it
+       * be able to edit it
        */}
-      {!isLoading && <Todos todoId={todoId} />}
+      {!isLoading && <Todos todosId={todosId} />}
       <Modal
         show={open.createTodo}
         onClose={handleClose}
         modalName="Add new Todo"
       >
-        <CreateTodo onClose={handleClose} id={todoId} />
+        <CreateTodo onClose={handleClose} id={todosId} />
       </Modal>
     </main>
   );

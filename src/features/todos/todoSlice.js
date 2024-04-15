@@ -2,52 +2,65 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [
+    // {
+    //   id: "",
+    //   todo: [
     //     {
     //       id: "",
-    //       todo: [
+    //       todoTitle: "",
+    //       notes: "",
+    //       checked: false,
+    //       subtasks: [
     //         {
     //           id: "",
-    //           todoTitle: "",
-    //           notes: "",
+    //           subtaskTitle: "",
     //           checked: false,
-    //           subtasks: [
-    //             {
-    //               subtaskTitle: "",
-    //               checked: false,
-    //             },
-    //           ],
     //         },
     //       ],
     //     },
+    //   ],
+    // },
   ],
 };
 
 const todoSlice = createSlice({
   name: "todo",
   initialState,
+
   reducers: {
     createTodo(state, action) {
-      const group = state.todos.findIndex(
-        (group) => group.id === action.payload.id
-      );
+      const group = state.todos.find((group) => group.id === action.payload.id);
 
-      if (group + 1) {
-        state.todos[group].todo.push({
-          todoTitle: action.payload.name,
-          id: action.payload.todoId,
-        });
-      }
+      group.todo.push({
+        todoTitle: action.payload.name,
+        id: action.payload.todoId,
+        checked: false,
+        subTasks: [],
+      });
     },
     createTodos(state, action) {
       if (state.todos.some((id) => id.id === action.payload)) return;
       state.todos.push({ id: action.payload, todo: [] });
     },
+    completeTodo(state, action) {
+      const group = state.todos.find(
+        (group) => group.id === action.payload.todosId
+      );
+
+      const todo = group.todo.find((todo) => todo.id === action.payload.id);
+
+      todo.checked = !todo.checked;
+    },
     /**
      * TODO:
      * complete the deleteTodo and editTodo
      */
-    deleteTodo() {
-      console.log("Todo Deleted!");
+    deleteTodo(state, action) {
+      const group = state.todos.find(
+        (group) => group.id === action.payload.todosId
+      );
+      const todo = group.todo.filter((todo) => todo.id !== action.payload.id);
+      group.todo = todo;
     },
     editTodo() {
       console.log("Todo Edited!");
@@ -55,22 +68,34 @@ const todoSlice = createSlice({
   },
 });
 
-function selectTodoId(_, id) {
-  return id;
+function selectTodosId(_, todosId) {
+  return todosId;
 }
-function selectTodo(state) {
+function selectTodoId(_, __, todoId) {
+  return todoId;
+}
+function selectTodos(state) {
   return state;
 }
 
 export const getTodos = createSelector(
-  [selectTodoId, selectTodo],
-  (id, state) => {
-    const result = state.todo.todos.find((todo) => todo.id === id);
-    // console.log(result);
+  [selectTodosId, selectTodos],
+  (todosId, state) => {
+    const result = state.todo.todos.find((todo) => todo.id === todosId);
+    return result;
+  }
+);
+
+export const getTodo = createSelector(
+  [selectTodosId, selectTodoId, selectTodos],
+  (todosId, todoId, state) => {
+    const todos = state.todo.todos.find((todo) => todo.id === todosId);
+
+    const result = todos.todo.find((todo) => todo.id === todoId);
     return result;
   }
 );
 
 export default todoSlice.reducer;
-export const { createTodo, deleteTodo, editTodo, createTodos } =
+export const { createTodo, deleteTodo, editTodo, createTodos, completeTodo } =
   todoSlice.actions;
