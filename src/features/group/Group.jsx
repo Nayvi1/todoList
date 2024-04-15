@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getTodos } from "../todos/todoSlice";
 
 /* eslint-disable react/prop-types */
 function Groups({ groupName, categoryName, onEdit, id, onDelete }) {
+  const numberOfTodos = useSelector((state) => getTodos(state, id)).todo.length;
+  console.log(numberOfTodos);
   return (
     <div className="w-full flex justify-between items-center border-b border-b-lynch-950">
       <div>
@@ -11,7 +15,12 @@ function Groups({ groupName, categoryName, onEdit, id, onDelete }) {
           </h2>
         </Link>
         <p className="text-lynch-500 capitalize">
-          %NUMBER OF TASKS% Tasks, {categoryName.toLowerCase()}
+          {numberOfTodos === 0
+            ? "No Task"
+            : numberOfTodos === 1
+            ? "One Task"
+            : numberOfTodos + " Tasks"}{" "}
+          , {categoryName.toLowerCase()}
         </p>
       </div>
       <div className="flex gap-3 [&>img]:sm:w-10 [&>img]:w-7 [&>img]:cursor-pointer">

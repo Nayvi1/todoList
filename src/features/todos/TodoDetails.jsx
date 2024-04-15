@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import SubTodo from "./SubTodo";
 import { getTodo } from "./todoSlice";
+
 /* eslint-disable react/prop-types */
 function TodoDetails({ id, todosId }) {
   const todo = useSelector((state) => getTodo(state, todosId, id));
@@ -10,10 +11,7 @@ function TodoDetails({ id, todosId }) {
     <div className="bg-slate-200 rounded-lg p-6">
       {todo ? (
         <>
-          <div className="flex justify-between">
-            <h2 className="font-bold text-[28px]">{todo.todoTitle}</h2>
-            <img src="/svg/edit.svg" className="w-8" alt="" />
-          </div>
+          <h2 className="font-bold text-[28px]">{todo.todoTitle}</h2>
 
           <div>
             <p className="text-xl">Notes:</p>

@@ -36,8 +36,10 @@ function GroupMenu() {
   }
 
   function handleClose() {
-    setOpen((state) => {
-      return { ...state, create: false, edit: false, delete: false };
+    setOpen({
+      create: false,
+      edit: false,
+      delete: false,
     });
   }
   function handleEdit(id) {

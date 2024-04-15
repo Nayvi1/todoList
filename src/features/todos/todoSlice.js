@@ -51,19 +51,13 @@ const todoSlice = createSlice({
 
       todo.checked = !todo.checked;
     },
-    /**
-     * TODO:
-     * complete the deleteTodo and editTodo
-     */
+
     deleteTodo(state, action) {
       const group = state.todos.find(
         (group) => group.id === action.payload.todosId
       );
       const todo = group.todo.filter((todo) => todo.id !== action.payload.id);
       group.todo = todo;
-    },
-    editTodo() {
-      console.log("Todo Edited!");
     },
   },
 });
@@ -97,5 +91,5 @@ export const getTodo = createSelector(
 );
 
 export default todoSlice.reducer;
-export const { createTodo, deleteTodo, editTodo, createTodos, completeTodo } =
+export const { createTodo, deleteTodo, createTodos, completeTodo } =
   todoSlice.actions;

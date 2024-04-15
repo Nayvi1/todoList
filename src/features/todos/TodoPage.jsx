@@ -53,10 +53,7 @@ function TodoPage() {
           />
         </div>
       </div>
-      {/**
-       * TODO:
-       * be able to edit it
-       */}
+
       {!isLoading && <Todos todosId={todosId} />}
       <Modal
         show={open.createTodo}
