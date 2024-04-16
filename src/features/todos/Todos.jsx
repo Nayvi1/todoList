@@ -29,8 +29,8 @@ function Todos({ todosId }) {
   }
 
   return (
-    <div className="flex gap-5 mt-5 ">
-      <div className="flex flex-col gap-2 w-full">
+    <div className="flex gap-5 mt-5 flex-col sm:flex-row">
+      <div className="flex flex-col gap-2 sm:w-1/2">
         {todos.map((todo) => {
           return (
             <Todo
@@ -46,7 +46,7 @@ function Todos({ todosId }) {
           );
         })}
       </div>
-      <div className="w-full">
+      <div className="sm:w-1/2 sticky bottom-12 py-7 sm:static">
         <TodoDetails id={id} todosId={todosId} />
       </div>
     </div>

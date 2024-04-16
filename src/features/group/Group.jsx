@@ -5,7 +5,7 @@ import { getTodos } from "../todos/todoSlice";
 /* eslint-disable react/prop-types */
 function Groups({ groupName, categoryName, onEdit, id, onDelete }) {
   const numberOfTodos = useSelector((state) => getTodos(state, id)).todo.length;
-  console.log(numberOfTodos);
+
   return (
     <div className="w-full flex justify-between items-center border-b border-b-lynch-950">
       <div>

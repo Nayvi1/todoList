@@ -39,22 +39,33 @@ function TodoPage() {
     <main className="max-w-[1360px] mx-auto sm:p-10 p-7">
       <div className="flex justify-between items-center">
         <h1 className="font-bold text-3xl text-lynch-900">{group.name}</h1>
-        <div className="flex gap-3">
-          {/* <img src="/svg/edit.svg" className="w-10 cursor-pointer" alt="" /> */}
-          <IsMobile
-            nonMobile={
-              <>
-                <Button to="/groups" type="secondery">
-                  Back
-                </Button>
-                <Button onClick={handleClick}>New</Button>
-              </>
-            }
-          />
-        </div>
+
+        {/* <img src="/svg/edit.svg" className="w-10 cursor-pointer" alt="" /> */}
+        <IsMobile
+          nonMobile={
+            <div className="flex gap-3">
+              <Button to="/groups" type="secondery">
+                Back
+              </Button>
+              <Button onClick={handleClick}>New</Button>
+            </div>
+          }
+        />
       </div>
 
       {!isLoading && <Todos todosId={todosId} />}
+      <IsMobile
+        mobile={
+          <div className="flex justify-between sticky bottom-0 py-7">
+            <Button to="/groups" bigSize type="secondery">
+              Back
+            </Button>
+            <Button bigSize onClick={handleClick}>
+              New
+            </Button>
+          </div>
+        }
+      />
       <Modal
         show={open.createTodo}
         onClose={handleClose}

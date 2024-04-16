@@ -24,7 +24,7 @@ function Todo({
         />
         <span className="absolute top-0 left-0 h-5 w-5 border border-lynch-900 transition-[border] duration-100 rounded-full group-hover:sm:border-[4px] peer-checked:!border-[10px]"></span>
         <span className="peer-checked:text-lynch-300 peer-checked:line-through">
-          {todoText}
+          {todoText.length >= 10 ? todoText.slice(0, 10) + "..." : todoText}
         </span>
       </label>
       {checked ? (

@@ -16,7 +16,7 @@ function Button({
       "text-white text-lg hover:bg-lynch-600 active:bg-lynch-700 bg-lynch-500 ",
     secondery:
       commonStyle +
-      "text-lg border-[2px] border-lynch-500 hover:border-lynch-600 active:border-lynch-700 text-lynch-500 hover:text-lynch-600 active:text-lynch-700",
+      "text-lg border-[2px] bg-white border-lynch-500 hover:border-lynch-600 active:border-lynch-700 text-lynch-500 hover:text-lynch-600 active:text-lynch-700",
   };
 
   if (to)
