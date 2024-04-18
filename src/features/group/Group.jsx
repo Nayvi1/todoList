@@ -4,7 +4,8 @@ import { getTodos } from "../todos/todoSlice";
 
 /* eslint-disable react/prop-types */
 function Groups({ groupName, categoryName, onEdit, id, onDelete }) {
-  const numberOfTodos = useSelector((state) => getTodos(state, id)).todo.length;
+  const numberOfTodos = useSelector((state) => getTodos(state, id))?.todo
+    .length;
 
   return (
     <div className="w-full flex justify-between items-center border-b border-b-lynch-950">
@@ -15,7 +16,7 @@ function Groups({ groupName, categoryName, onEdit, id, onDelete }) {
           </h2>
         </Link>
         <p className="text-lynch-500 capitalize">
-          {numberOfTodos === 0
+          {!numberOfTodos
             ? "No Task"
             : numberOfTodos === 1
             ? "One Task"

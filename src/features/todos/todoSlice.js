@@ -36,6 +36,7 @@ const todoSlice = createSlice({
         id: action.payload.todoId,
         checked: false,
         subTasks: [],
+        note: "",
       });
     },
     createTodos(state, action) {
@@ -58,6 +59,15 @@ const todoSlice = createSlice({
       );
       const todo = group.todo.filter((todo) => todo.id !== action.payload.id);
       group.todo = todo;
+    },
+    addNote(state, action) {
+      const group = state.todos.find(
+        (group) => group.id === action.payload.todosId
+      );
+
+      const todo = group.todo.find((todo) => todo.id === action.payload.id);
+      console.log(todo);
+      todo.note = action.payload.value;
     },
   },
 });
@@ -91,5 +101,5 @@ export const getTodo = createSelector(
 );
 
 export default todoSlice.reducer;
-export const { createTodo, deleteTodo, createTodos, completeTodo } =
+export const { createTodo, deleteTodo, createTodos, completeTodo, addNote } =
   todoSlice.actions;
